@@ -1,16 +1,16 @@
 import React, { Component, Fragment } from "react";
-import { CssBaseline, Typography } from "@material-ui/core/";
+import { CssBaseline } from "@material-ui/core/";
+
+import NavBar from "./components/NavBar/NavBar";
+import Picker from "./container/Picker/Picker";
 
 class App extends Component {
   render() {
     return (
       <Fragment>
         <CssBaseline />
-        <div className="App">
-          <Typography variant="display2" color="inherit">
-            Work in progress
-          </Typography>
-        </div>
+        <NavBar />
+        <Picker />
       </Fragment>
     );
   }
