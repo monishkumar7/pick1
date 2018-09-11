@@ -1,11 +1,15 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { Typography, Grid, Button, Card, TextField } from "@material-ui/core";
+import uniqid from "uniqid";
+
 import Spinner from "../../components/UI/Spinner/Spinner";
+import ListItem from "../../components/ListItem/ListItem";
 
 const styles = {
   container: {
-    marginTop: "5rem"
+    marginTop: "5rem",
+    marginBottom: "10rem"
   },
   content: {
     textAlign: "center"
@@ -14,13 +18,23 @@ const styles = {
     padding: "1rem",
     margin: "3rem 2rem"
   },
-  listItemCard: {
+  listItemsCard: {
     padding: "1rem",
     margin: ".1rem 2rem"
   },
   newItemCard: {
     padding: "1rem",
     margin: "2rem"
+  },
+  listItem: {
+    textAlign: "left",
+    padding: ".2rem"
+  },
+  fixedContainer: {
+    background: "white",
+    position: "fixed",
+    bottom: "0",
+    padding: "1rem"
   }
 };
 
@@ -38,7 +52,7 @@ class Picker extends Component {
     this.setState(prevState => ({
       ...prevState,
       items: prevState.items.concat({
-        id: prevState.items.length + 1,
+        id: uniqid(),
         text: prevState.newItemValue
       }),
       newItemValue: ""
@@ -71,6 +85,17 @@ class Picker extends Component {
     }));
   };
 
+  deleteItem = id => {
+    let updatedItemsArray = [];
+    for (let item of this.state.items) {
+      if (item.id !== id) updatedItemsArray = updatedItemsArray.concat(item);
+    }
+    this.setState(prevState => ({
+      ...prevState,
+      items: updatedItemsArray
+    }));
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -79,59 +104,63 @@ class Picker extends Component {
           <Grid container>
             {this.state.picking && (
               <Grid item xs={12}>
-                <Card className={classes.pickedItemCard}>
+                <Card>
                   <Spinner />
                 </Card>
               </Grid>
             )}
-            {this.state.items.length > 0 &&
-              this.state.items.map(item => (
-                <Grid item xs={12} key={item.id}>
-                  <Card className={classes.listItemCard}>
-                    <Typography variant="body1">{item.text}</Typography>
-                  </Card>
-                </Grid>
-              ))}
-            <Grid item xs={12}>
-              <Card className={classes.newItemCard}>
-                <form onSubmit={event => this.handleFormSubmit(event)}>
-                  <TextField
-                    label="Add New Item"
-                    placeholder="Enter New Item"
-                    className={classes.textField}
-                    value={this.state.newItemValue}
-                    margin="normal"
-                    onChange={event => this.inputChangeHandler(event)}
+            {this.state.items.length > 0 && (
+              <Grid item xs={12}>
+                {this.state.items.map(item => (
+                  <ListItem
+                    text={item.text}
+                    key={item.id}
+                    deleteItem={id => {
+                      this.deleteItem(item.id);
+                    }}
                   />
-                </form>
-              </Card>
+                ))}
+              </Grid>
+            )}
+          </Grid>
+          <Grid container className={classes.fixedContainer}>
+            <Grid item xs={12}>
+              <form onSubmit={event => this.handleFormSubmit(event)}>
+                <TextField
+                  label="Add New Item"
+                  placeholder="Enter New Item"
+                  className={classes.textField}
+                  value={this.state.newItemValue}
+                  margin="normal"
+                  onChange={event => this.inputChangeHandler(event)}
+                />
+              </form>
             </Grid>
             {this.state.pickedItem ? (
-              <Fragment>
-                <Grid item xs={6}>
-                  <Card className={classes.pickedItemCard}>
+              <Grid item xs={12}>
+                <Grid container>
+                  <Grid item xs={12}>
                     <Typography variant="body2">
-                      Picked Item - {this.state.pickedItem}
+                      {this.state.pickedItem}
                     </Typography>
-                  </Card>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Button
+                      variant="extendedFab"
+                      color="secondary"
+                      onClick={this.pickItem}
+                    >
+                      <Typography variant="button" color="inherit">
+                        Pick Again
+                      </Typography>
+                    </Button>
+                  </Grid>
                 </Grid>
-
-                <Grid item xs={6}>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={this.pickItem}
-                  >
-                    <Typography variant="button" color="inherit">
-                      Pick Again
-                    </Typography>
-                  </Button>
-                </Grid>
-              </Fragment>
+              </Grid>
             ) : (
               <Grid item xs={12}>
                 <Button
-                  variant="contained"
+                  variant="extendedFab"
                   color="secondary"
                   onClick={this.pickItem}
                 >
