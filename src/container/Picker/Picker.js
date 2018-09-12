@@ -24,6 +24,7 @@ const styles = theme => ({
     background: "white",
     position: "fixed",
     bottom: "0",
+    left: "0",
     boxShadow: "0 -1px 5px #ddd"
   },
   textField: {
