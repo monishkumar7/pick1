@@ -6,37 +6,36 @@ import uniqid from "uniqid";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import ListItem from "../../components/ListItem/ListItem";
 
-const styles = {
+const styles = theme => ({
   container: {
     marginTop: "5rem",
-    marginBottom: "10rem"
+    marginBottom: "20rem"
   },
   content: {
     textAlign: "center"
   },
-  pickedItemCard: {
-    padding: "1rem",
-    margin: "3rem 2rem"
-  },
-  listItemsCard: {
-    padding: "1rem",
-    margin: ".1rem 2rem"
+  pickedItem: {
+    margin: "2rem 0 0"
   },
   newItemCard: {
-    padding: "1rem",
-    margin: "2rem"
-  },
-  listItem: {
-    textAlign: "left",
-    padding: ".2rem"
+    margin: "1rem 0"
   },
   fixedContainer: {
     background: "white",
     position: "fixed",
     bottom: "0",
+    boxShadow: "0 -1px 5px #ddd"
+  },
+  textField: {
+    width: "70%"
+  },
+  pickerButton: {
+    margin: "1rem 0 2rem"
+  },
+  pickedItemText: {
     padding: "1rem"
   }
-};
+});
 
 class Picker extends Component {
   state = {
@@ -124,7 +123,15 @@ class Picker extends Component {
             )}
           </Grid>
           <Grid container className={classes.fixedContainer}>
-            <Grid item xs={12}>
+            {this.state.pickedItem !== "" && (
+              <Grid item xs={12} className={classes.pickedItem}>
+                <Typography variant="caption">Picked Item</Typography>
+                <Typography className={classes.pickedItemText} variant="title">
+                  {this.state.pickedItem}
+                </Typography>
+              </Grid>
+            )}
+            <Grid item xs={12} className={classes.newItemCard}>
               <form onSubmit={event => this.handleFormSubmit(event)}>
                 <TextField
                   label="Add New Item"
@@ -139,12 +146,7 @@ class Picker extends Component {
             {this.state.pickedItem ? (
               <Grid item xs={12}>
                 <Grid container>
-                  <Grid item xs={12}>
-                    <Typography variant="body2">
-                      {this.state.pickedItem}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={12}>
+                  <Grid item xs={12} className={classes.pickerButton}>
                     <Button
                       variant="extendedFab"
                       color="secondary"
@@ -158,7 +160,7 @@ class Picker extends Component {
                 </Grid>
               </Grid>
             ) : (
-              <Grid item xs={12}>
+              <Grid item xs={12} className={classes.pickerButton}>
                 <Button
                   variant="extendedFab"
                   color="secondary"

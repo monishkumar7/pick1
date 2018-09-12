@@ -7,15 +7,18 @@ import registerServiceWorker from "./registerServiceWorker";
 
 const theme = createMuiTheme({
   typography: {
-    fontFamily: ["Hind Madurai", "sans-serif"].join(",")
+    fontFamily: ["Noto Sans", "sans-serif"].join(",")
   },
   palette: {
     primary: {
-      main: "#424242"
+      main: "#ffffff"
     },
     secondary: {
-      main: "#c310ef"
-    }
+      main: "#1976d2"
+    },
+    dark: "#333",
+    light: "#ddd",
+    background: "#fff"
   }
 });
 
