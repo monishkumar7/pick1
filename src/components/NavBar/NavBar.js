@@ -16,7 +16,7 @@ const style = theme => ({
 const navbar = props => {
   const { classes } = props;
   return (
-    <AppBar className={classes.appbar}>
+    <AppBar className={classes.appbar} color="inherit">
       <Toolbar className={classes.toolbar} position="static">
         <Typography variant="headline" color="inherit">
           pick1

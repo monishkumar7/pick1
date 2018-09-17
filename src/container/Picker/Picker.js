@@ -1,6 +1,17 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import { Typography, Grid, Button, Card, TextField } from "@material-ui/core";
+import {
+  Typography,
+  Grid,
+  Button,
+  Card,
+  TextField,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions
+} from "@material-ui/core";
 import uniqid from "uniqid";
 
 import Spinner from "../../components/UI/Spinner/Spinner";
@@ -35,6 +46,9 @@ const styles = theme => ({
   },
   pickedItemText: {
     padding: "1rem"
+  },
+  dialogPaper: {
+    background: "white"
   }
 });
 
@@ -44,7 +58,8 @@ class Picker extends Component {
     picked: false,
     newItemValue: "",
     pickedItem: "",
-    picking: false
+    picking: false,
+    dialogOpen: false
   };
 
   handleFormSubmit = event => {
@@ -96,6 +111,28 @@ class Picker extends Component {
     }));
   };
 
+  handleClearAll = () => {
+    this.setState(prevState => ({
+      ...prevState,
+      dialogOpen: true
+    }));
+  };
+
+  handleModalClose = () => {
+    this.setState(prevState => ({
+      ...prevState,
+      dialogOpen: false
+    }));
+  };
+
+  confirmClearAll = () => {
+    this.setState(prevState => ({
+      ...prevState,
+      items: [],
+      dialogOpen: false
+    }));
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -122,7 +159,40 @@ class Picker extends Component {
                 ))}
               </Grid>
             )}
+            {this.state.items.length > 4 && (
+              <Grid item xs={12}>
+                <Button variant="outlined" onClick={this.handleClearAll}>
+                  <Typography variant="button">Clear All</Typography>
+                </Button>
+              </Grid>
+            )}
           </Grid>
+          <Dialog
+            open={this.state.dialogOpen}
+            onClose={this.handleModalClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            classes={{
+              paper: classes.dialogPaper
+            }}
+          >
+            <DialogTitle id="alert-dialog-title">
+              {"Confirm Clear All"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Are you sure you want to clear all the items in the list?
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleModalClose} color="primary">
+                No
+              </Button>
+              <Button onClick={this.confirmClearAll} color="primary">
+                Yes, Clear All
+              </Button>
+            </DialogActions>
+          </Dialog>
           <Grid container className={classes.fixedContainer}>
             {this.state.pickedItem !== "" && (
               <Grid item xs={12} className={classes.pickedItem}>
@@ -150,7 +220,7 @@ class Picker extends Component {
                   <Grid item xs={12} className={classes.pickerButton}>
                     <Button
                       variant="extendedFab"
-                      color="secondary"
+                      color="primary"
                       onClick={this.pickItem}
                     >
                       <Typography variant="button" color="inherit">
@@ -164,7 +234,7 @@ class Picker extends Component {
               <Grid item xs={12} className={classes.pickerButton}>
                 <Button
                   variant="extendedFab"
-                  color="secondary"
+                  color="primary"
                   onClick={this.pickItem}
                 >
                   <Typography variant="button" color="inherit">
