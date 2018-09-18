@@ -24,6 +24,9 @@ const style = theme => ({
   hiddenIcon: {
     height: "48px",
     width: "48px"
+  },
+  appBar: {
+    boxShadow: "0 1px 5px #ddd"
   }
 });
 
@@ -69,7 +72,7 @@ class Layout extends Component {
 
     return (
       <div>
-        <AppBar color="inherit">
+        <AppBar className={classes.appBar} color="inherit">
           <Toolbar className={classes.toolbar} position="static">
             <IconButton
               color="inherit"
