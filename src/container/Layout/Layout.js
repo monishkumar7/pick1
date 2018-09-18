@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
+import { Link } from "react-router-dom";
 
 const style = theme => ({
   drawerPaper: {
@@ -36,8 +37,14 @@ class Layout extends Component {
   };
 
   handleDrawerToggle = () => {
-    this.setState(prevState => ({
-      drawerOpen: !prevState.drawerOpen
+    this.setState(state => ({
+      drawerOpen: !state.drawerOpen
+    }));
+  };
+
+  closeDrawer = () => {
+    this.setState(state => ({
+      drawerOpen: false
     }));
   };
 
@@ -48,24 +55,34 @@ class Layout extends Component {
       <div>
         <Divider />
         <List>
-          <ListItem button>
-            <ListItemText primary="Basic" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="Couple's Mode" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="Toss" />
-          </ListItem>
+          <Link to="/" onClick={this.closeDrawer}>
+            <ListItem button>
+              <ListItemText primary="Picker" />
+            </ListItem>
+          </Link>
+          <Link to="/couples">
+            <ListItem button>
+              <ListItemText primary="Couple's Mode" />
+            </ListItem>
+          </Link>
+          <Link to="/toss" onClick={this.closeDrawer}>
+            <ListItem button>
+              <ListItemText primary="Toss" />
+            </ListItem>
+          </Link>
         </List>
         <Divider />
         <List>
-          <ListItem button>
-            <ListItemText primary="About" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="Help" />
-          </ListItem>
+          <Link to="/about">
+            <ListItem button>
+              <ListItemText primary="About" />
+            </ListItem>
+          </Link>
+          <Link to="/help">
+            <ListItem button>
+              <ListItemText primary="Help" />
+            </ListItem>
+          </Link>
         </List>
       </div>
     );
