@@ -46,9 +46,6 @@ const styles = theme => ({
   },
   pickedItemText: {
     padding: "1rem"
-  },
-  dialogPaper: {
-    background: "white"
   }
 });
 
@@ -172,9 +169,6 @@ class Picker extends Component {
             onClose={this.handleModalClose}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
-            classes={{
-              paper: classes.dialogPaper
-            }}
           >
             <DialogTitle id="alert-dialog-title">
               {"Confirm Clear All"}
