@@ -8,6 +8,9 @@ const style = {
   coinTossDiv: {
     marginTop: "7rem",
     textAlign: "center"
+  },
+  tossButton: {
+    width: "160px"
   }
 };
 

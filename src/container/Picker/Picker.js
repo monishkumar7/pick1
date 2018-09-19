@@ -12,6 +12,7 @@ import {
   DialogContentText,
   DialogActions
 } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
 import uniqid from "uniqid";
 
 import Spinner from "../../components/UI/Spinner/Spinner";
@@ -20,32 +21,44 @@ import ListItem from "../../components/ListItem/ListItem";
 const styles = theme => ({
   container: {
     marginTop: "5rem",
-    marginBottom: "20rem"
+    marginBottom: "16rem"
   },
   content: {
     textAlign: "center"
-  },
-  pickedItem: {
-    margin: "2rem 0 0"
   },
   newItemCard: {
     margin: "1rem 0"
   },
   fixedContainer: {
-    background: "white",
     position: "fixed",
     bottom: "0",
-    left: "0",
-    boxShadow: "0 -1px 5px #ddd"
+    left: "0"
   },
   textField: {
     width: "70%"
+  },
+  button: {
+    width: "160px"
   },
   pickerButton: {
     margin: "1rem 0 2rem"
   },
   pickedItemText: {
     padding: "1rem"
+  },
+  pickedItem: {
+    padding: "1rem 0 0"
+  },
+  pickedContainer: {
+    padding: "1rem 2rem"
+  },
+  hiddenIcon: {
+    height: "24px",
+    width: "24px"
+  },
+  pickedHeader: {
+    padding: "0 1rem",
+    alignItems: "center"
   }
 });
 
@@ -130,6 +143,14 @@ class Picker extends Component {
     }));
   };
 
+  handleClosePicked = () => {
+    this.setState(prevState => ({
+      ...prevState,
+      picked: false,
+      pickedItem: ""
+    }));
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -143,6 +164,18 @@ class Picker extends Component {
                 </Card>
               </Grid>
             )}
+            <Grid item xs={12} className={classes.newItemCard}>
+              <form onSubmit={event => this.handleFormSubmit(event)}>
+                <TextField
+                  label="Add New Item"
+                  placeholder="Enter New Item"
+                  className={classes.textField}
+                  value={this.state.newItemValue}
+                  margin="normal"
+                  onChange={event => this.inputChangeHandler(event)}
+                />
+              </form>
+            </Grid>
             {this.state.items.length > 0 && (
               <Grid item xs={12}>
                 {this.state.items.map(item => (
@@ -189,25 +222,36 @@ class Picker extends Component {
           </Dialog>
           <Grid container className={classes.fixedContainer}>
             {this.state.pickedItem !== "" && (
-              <Grid item xs={12} className={classes.pickedItem}>
-                <Typography variant="caption">Picked Item</Typography>
-                <Typography className={classes.pickedItemText} variant="title">
-                  {this.state.pickedItem}
-                </Typography>
+              <Grid item xs={12} className={classes.pickedContainer}>
+                <Card className={classes.pickedItem}>
+                  <Grid
+                    container
+                    justify="space-between"
+                    className={classes.pickedHeader}
+                  >
+                    <Grid item>
+                      <div className={classes.hiddenIcon} />
+                    </Grid>
+                    <Grid item>
+                      <Typography variant="caption">Picked Item</Typography>
+                    </Grid>
+                    <Grid item>
+                      <CloseIcon
+                        className={classes.closeIcon}
+                        onClick={this.handleClosePicked}
+                      />
+                    </Grid>
+                  </Grid>
+                  <Typography
+                    className={classes.pickedItemText}
+                    variant="title"
+                  >
+                    {this.state.pickedItem}
+                  </Typography>
+                </Card>
               </Grid>
             )}
-            <Grid item xs={12} className={classes.newItemCard}>
-              <form onSubmit={event => this.handleFormSubmit(event)}>
-                <TextField
-                  label="Add New Item"
-                  placeholder="Enter New Item"
-                  className={classes.textField}
-                  value={this.state.newItemValue}
-                  margin="normal"
-                  onChange={event => this.inputChangeHandler(event)}
-                />
-              </form>
-            </Grid>
+
             {this.state.pickedItem ? (
               <Grid item xs={12}>
                 <Grid container>
@@ -216,9 +260,10 @@ class Picker extends Component {
                       variant="extendedFab"
                       color="primary"
                       onClick={this.pickItem}
+                      className={classes.button}
                     >
                       <Typography variant="button" color="inherit">
-                        Pick Again
+                        Pick1 Again
                       </Typography>
                     </Button>
                   </Grid>
@@ -230,9 +275,10 @@ class Picker extends Component {
                   variant="extendedFab"
                   color="primary"
                   onClick={this.pickItem}
+                  className={classes.button}
                 >
                   <Typography variant="button" color="inherit">
-                    Pick Item
+                    Pick1
                   </Typography>
                 </Button>
               </Grid>
