@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 
 import "./CoinToss.css";
+import { Button } from "@material-ui/core";
 
 const style = {
   coinTossDiv: {
@@ -41,10 +42,18 @@ class CoinToss extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.coinTossDiv}>
-        <div className={this.state.coinClasses} onClick={this.coinFlip}>
+        <div className={this.state.coinClasses}>
           <div className={this.state.sideAClasses}> HEADS </div>
           <div className={this.state.sideBClasses}> TAILS </div>
         </div>
+        <Button
+          variant="extendedFab"
+          color="primary"
+          onClick={this.coinFlip}
+          className={classes.tossButton}
+        >
+          Toss
+        </Button>
       </div>
     );
   }

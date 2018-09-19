@@ -28,6 +28,12 @@ const style = theme => ({
   },
   appBar: {
     boxShadow: "0 1px 5px #ddd"
+  },
+  sideDrawerLink: {
+    textDecoration: "none"
+  },
+  logo: {
+    fontWeight: "700"
   }
 });
 
@@ -55,34 +61,50 @@ class Layout extends Component {
       <div>
         <Divider />
         <List>
-          <Link to="/" onClick={this.closeDrawer}>
-            <ListItem button>
+          <ListItem button>
+            <Link
+              to="/"
+              onClick={this.closeDrawer}
+              className={classes.sideDrawerLink}
+            >
               <ListItemText primary="Picker" />
-            </ListItem>
-          </Link>
-          <Link to="/couples">
-            <ListItem button>
+            </Link>
+          </ListItem>
+          {/* <ListItem button>
+            <Link to="/couples" onClick={this.closeDrawer} className={classes.sideDrawerLink}>
               <ListItemText primary="Couple's Mode" />
-            </ListItem>
-          </Link>
-          <Link to="/toss" onClick={this.closeDrawer}>
-            <ListItem button>
+            </Link>
+          </ListItem> */}
+          <ListItem button>
+            <Link
+              to="/toss"
+              onClick={this.closeDrawer}
+              className={classes.sideDrawerLink}
+            >
               <ListItemText primary="Toss" />
-            </ListItem>
-          </Link>
+            </Link>
+          </ListItem>
         </List>
         <Divider />
         <List>
-          <Link to="/about">
-            <ListItem button>
+          <ListItem button>
+            <Link
+              to="/about"
+              onClick={this.closeDrawer}
+              className={classes.sideDrawerLink}
+            >
               <ListItemText primary="About" />
-            </ListItem>
-          </Link>
-          <Link to="/help">
-            <ListItem button>
+            </Link>
+          </ListItem>
+          <ListItem button>
+            <Link
+              to="/help"
+              onClick={this.closeDrawer}
+              className={classes.sideDrawerLink}
+            >
               <ListItemText primary="Help" />
-            </ListItem>
-          </Link>
+            </Link>
+          </ListItem>
         </List>
       </div>
     );
@@ -98,7 +120,11 @@ class Layout extends Component {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="headline" color="inherit">
+            <Typography
+              variant="headline"
+              color="inherit"
+              className={classes.logo}
+            >
               pick1
             </Typography>
             <div className={classes.hiddenIcon} />
