@@ -8,7 +8,8 @@ import {
   List,
   ListItem,
   ListItemText,
-  Drawer
+  Drawer,
+  Grid
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -16,7 +17,8 @@ import { Link } from "react-router-dom";
 
 const style = theme => ({
   drawerPaper: {
-    width: 240
+    width: 240,
+    padding: "1rem 0"
   },
   toolbar: {
     display: "flex",
@@ -59,52 +61,62 @@ class Layout extends Component {
 
     const drawer = (
       <div>
-        <Divider />
+        <Grid container justify="center">
+          <Grid item>
+            <Typography
+              variant="headline"
+              color="inherit"
+              className={classes.logo}
+            >
+              pick1
+            </Typography>
+          </Grid>
+        </Grid>
         <List>
-          <ListItem button>
-            <Link
-              to="/"
-              onClick={this.closeDrawer}
-              className={classes.sideDrawerLink}
-            >
+          <Link
+            to="/"
+            onClick={this.closeDrawer}
+            className={classes.sideDrawerLink}
+          >
+            <ListItem button>
               <ListItemText primary="Picker" />
-            </Link>
-          </ListItem>
-          {/* <ListItem button>
-            <Link to="/couples" onClick={this.closeDrawer} className={classes.sideDrawerLink}>
+            </ListItem>
+          </Link>
+          {/*<Link to="/couples" onClick={this.closeDrawer} className={classes.sideDrawerLink}>
+           <ListItem button>
               <ListItemText primary="Couple's Mode" />
-            </Link>
-          </ListItem> */}
-          <ListItem button>
-            <Link
-              to="/toss"
-              onClick={this.closeDrawer}
-              className={classes.sideDrawerLink}
-            >
+              </ListItem> 
+            </Link>*/}
+          <Link
+            to="/toss"
+            onClick={this.closeDrawer}
+            className={classes.sideDrawerLink}
+          >
+            <ListItem button>
               <ListItemText primary="Toss" />
-            </Link>
-          </ListItem>
+            </ListItem>
+          </Link>
         </List>
         <Divider />
         <List>
-          <ListItem button>
-            <Link
-              to="/about"
-              onClick={this.closeDrawer}
-              className={classes.sideDrawerLink}
-            >
+          <Link
+            to="/about"
+            onClick={this.closeDrawer}
+            className={classes.sideDrawerLink}
+          >
+            <ListItem button>
               <ListItemText primary="About" />
-            </Link>
-          </ListItem>
-          <ListItem button>
-            <Link
-              to="/help"
-              onClick={this.closeDrawer}
-              className={classes.sideDrawerLink}
-            >
+            </ListItem>
+          </Link>
+          <Link
+            to="/help"
+            onClick={this.closeDrawer}
+            className={classes.sideDrawerLink}
+          >
+            <ListItem button>
               <ListItemText primary="Help" />
-            </Link>
-          </ListItem>
+            </ListItem>
+          </Link>
         </List>
       </div>
     );

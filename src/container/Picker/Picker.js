@@ -47,7 +47,7 @@ const styles = theme => ({
     padding: "1rem"
   },
   pickedItem: {
-    padding: "1rem 0 0"
+    padding: "1rem 0 0.5rem"
   },
   pickedContainer: {
     padding: "1rem 2rem"
@@ -155,7 +155,7 @@ class Picker extends Component {
     const { classes } = this.props;
     return (
       <Grid className={classes.container} container justify="center">
-        <Grid item xs={12} md={8} className={classes.content}>
+        <Grid item xs={12} sm={8} className={classes.content}>
           <Grid container>
             {this.state.picking && (
               <Grid item xs={12}>
@@ -220,9 +220,9 @@ class Picker extends Component {
               </Button>
             </DialogActions>
           </Dialog>
-          <Grid container className={classes.fixedContainer}>
+          <Grid container className={classes.fixedContainer} justify="center">
             {this.state.pickedItem !== "" && (
-              <Grid item xs={12} className={classes.pickedContainer}>
+              <Grid item xs={12} sm={8} className={classes.pickedContainer}>
                 <Card className={classes.pickedItem}>
                   <Grid
                     container

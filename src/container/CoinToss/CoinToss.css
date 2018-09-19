@@ -1,8 +1,8 @@
 .coin {
   position: relative;
   margin: 0 auto;
-  width: 100px;
-  height: 100px;
+  width: 250px;
+  height: 250px;
   cursor: pointer;
 }
 .coin div {
@@ -19,13 +19,15 @@
     0 12px 20px -10px rgba(0, 0, 0, 0.4);
 }
 .side-a {
-  background-color: #bb0000;
+  background-image: url("../../assets/images/heads.png");
+  background-size: 250px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .side-b {
-  background-color: #3e3e3e;
+  background-image: url("../../assets/images/tails.png");
+  background-size: 250px;
   display: flex;
   justify-content: center;
   align-items: center;

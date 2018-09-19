@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { withStyles } from "@material-ui/core/styles";
+import { Grid, Button, withStyles } from "@material-ui/core";
 
 import "./CoinToss.css";
-import { Button } from "@material-ui/core";
 
 const style = {
   coinTossDiv: {
@@ -11,6 +10,12 @@ const style = {
   },
   tossButton: {
     width: "160px"
+  },
+  fixedContainer: {
+    position: "fixed",
+    bottom: "0",
+    left: "0",
+    padding: "1rem 0 2rem"
   }
 };
 
@@ -46,17 +51,21 @@ class CoinToss extends Component {
     return (
       <div className={classes.coinTossDiv}>
         <div className={this.state.coinClasses}>
-          <div className={this.state.sideAClasses}> HEADS </div>
-          <div className={this.state.sideBClasses}> TAILS </div>
+          <div className={this.state.sideAClasses} />
+          <div className={this.state.sideBClasses} />
         </div>
-        <Button
-          variant="extendedFab"
-          color="primary"
-          onClick={this.coinFlip}
-          className={classes.tossButton}
-        >
-          Toss
-        </Button>
+        <Grid container className={classes.fixedContainer} justify="center">
+          <Grid item>
+            <Button
+              variant="extendedFab"
+              color="primary"
+              onClick={this.coinFlip}
+              className={classes.tossButton}
+            >
+              Toss
+            </Button>
+          </Grid>
+        </Grid>
       </div>
     );
   }
