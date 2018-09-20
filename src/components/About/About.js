@@ -16,21 +16,25 @@ const style = {
 const about = props => {
   const { classes } = props;
   return (
-    <Grid container>
-      <Grid item xs={12} className={classes.title}>
-        <Typography variant="title">About</Typography>
-      </Grid>
-      <Grid item xs={12} className={classes.textContent}>
-        <Typography paragraph variant="body1">
-          pick1 is a very simple app to help you decide among options.
-        </Typography>
-        <Typography paragraph variant="body1">
-          We have all been there. Having way too many options to eat, too many
-          options to watch when scrolling through your favorite streaming
-          service. That is why I decided to make this simple app that throws the
-          decision into the hands of fate(in this case, your browser's random
-          number generator function).
-        </Typography>
+    <Grid container justify="center">
+      <Grid item xs={12} sm={8}>
+        <Grid container>
+          <Grid item xs={12} className={classes.title}>
+            <Typography variant="title">About</Typography>
+          </Grid>
+          <Grid item xs={12} className={classes.textContent}>
+            <Typography paragraph variant="body1">
+              pick1 is a very simple app to help you decide among options.
+            </Typography>
+            <Typography paragraph variant="body1">
+              We have all been there. Having way too many options to eat, too
+              many options to watch when scrolling through your favorite
+              streaming service. That is why I decided to make this simple app
+              that throws the decision into the hands of fate(in this case, your
+              browser's random number generator function).
+            </Typography>
+          </Grid>
+        </Grid>
       </Grid>
     </Grid>
   );

@@ -59,6 +59,13 @@ const styles = theme => ({
   pickedHeader: {
     padding: "0 1rem",
     alignItems: "center"
+  },
+  emptyContent: {
+    padding: "0 2rem",
+    margin: "2rem 0"
+  },
+  disabledButtonText: {
+    margin: "10px 0 0"
   }
 });
 
@@ -167,8 +174,8 @@ class Picker extends Component {
             <Grid item xs={12} className={classes.newItemCard}>
               <form onSubmit={event => this.handleFormSubmit(event)}>
                 <TextField
-                  label="Add New Item"
-                  placeholder="Enter New Item"
+                  label="Add New Choice"
+                  placeholder="Enter New Choice"
                   className={classes.textField}
                   value={this.state.newItemValue}
                   margin="normal"
@@ -176,6 +183,17 @@ class Picker extends Component {
                 />
               </form>
             </Grid>
+            {this.state.items.length === 0 && (
+              <Grid item xs={12} className={classes.emptyContent}>
+                <Typography variant="body1">
+                  Please enter your choices using the text box above. <br />
+                  <br />
+                  <br />
+                  Once your choices are entered, use the "Pick1" button below to
+                  pick one among the choices.
+                </Typography>
+              </Grid>
+            )}
             {this.state.items.length > 0 && (
               <Grid item xs={12}>
                 {this.state.items.map(item => (
@@ -208,7 +226,7 @@ class Picker extends Component {
             </DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
-                Are you sure you want to clear all the items in the list?
+                Are you sure you want to clear all the choices in the list?
               </DialogContentText>
             </DialogContent>
             <DialogActions>
@@ -233,7 +251,7 @@ class Picker extends Component {
                       <div className={classes.hiddenIcon} />
                     </Grid>
                     <Grid item>
-                      <Typography variant="caption">Picked Item</Typography>
+                      <Typography variant="caption">Picked Choice</Typography>
                     </Grid>
                     <Grid item>
                       <CloseIcon
@@ -261,11 +279,20 @@ class Picker extends Component {
                       color="primary"
                       onClick={this.pickItem}
                       className={classes.button}
+                      disabled={this.state.items.length < 2}
                     >
                       <Typography variant="button" color="inherit">
                         Pick1 Again
                       </Typography>
                     </Button>
+                    {this.state.items.length < 2 && (
+                      <Typography
+                        variant="caption"
+                        className={classes.disabledButtonText}
+                      >
+                        You must have atleast two choices to run Pick1
+                      </Typography>
+                    )}
                   </Grid>
                 </Grid>
               </Grid>
@@ -276,11 +303,20 @@ class Picker extends Component {
                   color="primary"
                   onClick={this.pickItem}
                   className={classes.button}
+                  disabled={this.state.items.length < 2}
                 >
                   <Typography variant="button" color="inherit">
                     Pick1
                   </Typography>
                 </Button>
+                {this.state.items.length < 2 && (
+                  <Typography
+                    variant="caption"
+                    className={classes.disabledButtonText}
+                  >
+                    You must have atleast two choices to run Pick1
+                  </Typography>
+                )}
               </Grid>
             )}
           </Grid>
