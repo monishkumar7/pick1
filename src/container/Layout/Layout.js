@@ -79,7 +79,7 @@ class Layout extends Component {
             className={classes.sideDrawerLink}
           >
             <ListItem button>
-              <ListItemText primary="Picker" />
+              <ListItemText primary="Home" />
             </ListItem>
           </Link>
           {/*<Link to="/couples" onClick={this.closeDrawer} className={classes.sideDrawerLink}>
@@ -93,7 +93,7 @@ class Layout extends Component {
             className={classes.sideDrawerLink}
           >
             <ListItem button>
-              <ListItemText primary="Toss" />
+              <ListItemText primary="Coin Toss" />
             </ListItem>
           </Link>
         </List>

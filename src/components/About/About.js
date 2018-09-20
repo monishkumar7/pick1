@@ -24,14 +24,16 @@ const about = props => {
           </Grid>
           <Grid item xs={12} className={classes.textContent}>
             <Typography paragraph variant="body1">
-              pick1 is a very simple app to help you decide among options.
-            </Typography>
-            <Typography paragraph variant="body1">
-              We have all been there. Having way too many options to eat, too
-              many options to watch when scrolling through your favorite
-              streaming service. That is why I decided to make this simple app
-              that throws the decision into the hands of fate(in this case, your
-              browser's random number generator function).
+              pick1 is a simple app to help you pick one among your choices.
+              <br />
+              <br />
+              We have all been there - having way too many choices of
+              restaurants to eat from or too many choices to watch when
+              scrolling through your favorite streaming service. These choices
+              often confuse us. That is why I decided to make this simple app
+              that throws the decision of picking one from your choices into the
+              hands of fate(in this case, your browser's random number generator
+              function).
             </Typography>
           </Grid>
         </Grid>

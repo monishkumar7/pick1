@@ -4,12 +4,12 @@ import { withStyles } from "@material-ui/core/styles";
 
 const style = {
   title: {
-    marginTop: "6rem",
+    margin: "6rem 0 2rem",
     padding: "0 2rem"
   },
   textContent: {
     padding: "1rem 2rem",
-    margin: "2rem 0"
+    margin: "1rem 0"
   }
 };
 
@@ -24,16 +24,32 @@ const help = props => {
           </Grid>
           <Grid item xs={12} className={classes.textContent}>
             <Typography paragraph variant="subheading">
-              Picker
+              pick1
             </Typography>
             <Typography paragraph variant="body1">
-              Enter your options. Press Pick1 button and there you go - fate(in
-              this case, your web browser) has decided for. If this is not the
-              choice you were looking for, keep hitting that button until your
-              preferred choice shows up{" "}
+              1. Enter your choices using the input textbox towards the top of
+              the page. <br />
+              <br />
+              2. Once you have atleast two choices to choose from, press "Pick1"
+              button to pick one. <br />
+              <br />
+              Pro Tip - Keep hitting the "Pick1 Again" button until your
+              preferred choice from the list shows up{" "}
               <span role="img" aria-label="wink">
                 😉
               </span>
+            </Typography>
+          </Grid>
+          <Grid item xs={12} className={classes.textContent}>
+            <Typography paragraph variant="subheading">
+              Coin Toss
+            </Typography>
+            <Typography paragraph variant="body1">
+              Use the "Toss" button towards the bottom of the page to begin the
+              toss.
+              <br />
+              <br />
+              Wait till the coin stops to toss the coin again.
             </Typography>
           </Grid>
         </Grid>

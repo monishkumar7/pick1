@@ -61,7 +61,7 @@ const styles = theme => ({
     alignItems: "center"
   },
   emptyContent: {
-    padding: "0 2rem",
+    padding: "0 3rem",
     margin: "2rem 0"
   },
   disabledButtonText: {
@@ -290,7 +290,7 @@ class Picker extends Component {
                         variant="caption"
                         className={classes.disabledButtonText}
                       >
-                        You must have atleast two choices to run Pick1
+                        You must enter atleast two choices to run Pick1
                       </Typography>
                     )}
                   </Grid>
@@ -314,7 +314,7 @@ class Picker extends Component {
                     variant="caption"
                     className={classes.disabledButtonText}
                   >
-                    You must have atleast two choices to run Pick1
+                    You must enter atleast two choices to run Pick1
                   </Typography>
                 )}
               </Grid>
