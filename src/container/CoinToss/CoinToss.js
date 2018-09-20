@@ -23,13 +23,15 @@ class CoinToss extends Component {
   state = {
     coinClasses: "coin",
     sideAClasses: "side-a",
-    sideBClasses: "side-b"
+    sideBClasses: "side-b",
+    tossing: false
   };
 
   coinFlip = () => {
     var flipResult = Math.random();
     this.setState(prevState => ({
       ...prevState,
+      tossing: true,
       coinClasses: ""
     }));
     if (flipResult <= 0.5) {
@@ -37,13 +39,19 @@ class CoinToss extends Component {
         ...prevState,
         coinClasses: "coin heads"
       }));
-      // this.forceUpdate();
     } else {
       this.setState(prevState => ({
         ...prevState,
         coinClasses: "coin tails"
       }));
     }
+    setTimeout(() => {
+      this.setState(prevState => ({
+        ...prevState,
+        coinClasses: "coin",
+        tossing: false
+      }));
+    }, 3000);
   };
 
   render() {
@@ -61,8 +69,9 @@ class CoinToss extends Component {
               color="primary"
               onClick={this.coinFlip}
               className={classes.tossButton}
+              disabled={this.state.tossing}
             >
-              Toss
+              {this.state.tossing ? "Toss in Progress" : "Toss"}
             </Button>
           </Grid>
         </Grid>

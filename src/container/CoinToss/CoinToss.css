@@ -10,10 +10,13 @@
   height: 100%;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
+  -o-border-radius: 50%;
   border-radius: 50%;
   -webkit-box-shadow: inset 0 0 45px rgba(255, 255, 255, 0.3),
     0 12px 20px -10px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: inset 0 0 45px rgba(255, 255, 255, 0.3),
+    0 12px 20px -10px rgba(0, 0, 0, 0.4);
+  -o-box-shadow: inset 0 0 45px rgba(255, 255, 255, 0.3),
     0 12px 20px -10px rgba(0, 0, 0, 0.4);
   box-shadow: inset 0 0 45px rgba(255, 255, 255, 0.3),
     0 12px 20px -10px rgba(0, 0, 0, 0.4);
@@ -36,16 +39,25 @@
 .coin {
   transition: -webkit-transform 1s ease-in;
   -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
 .coin div {
   position: absolute;
   -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 .side-a {
   z-index: 100;
 }
 .side-b {
   -webkit-transform: rotateX(-180deg);
+  -moz-transform: rotateX(-180deg);
+  -o-transform: rotateX(-180deg);
+  transform: rotateX(-180deg);
 }
 
 .coin.heads {
@@ -73,7 +85,86 @@
     transform: rotateX(1800deg);
   }
 }
+
+@-moz-keyframes flipHeads {
+  from {
+    -webkit-transform: rotateX(0);
+    -moz-transform: rotateX(0);
+    transform: rotateX(0);
+  }
+  to {
+    -webkit-transform: rotateX(1800deg);
+    -moz-transform: rotateX(1800deg);
+    transform: rotateX(1800deg);
+  }
+}
+
+@-o-keyframes flipHeads {
+  from {
+    -webkit-transform: rotateX(0);
+    -moz-transform: rotateX(0);
+    transform: rotateX(0);
+  }
+  to {
+    -webkit-transform: rotateX(1800deg);
+    -moz-transform: rotateX(1800deg);
+    transform: rotateX(1800deg);
+  }
+}
+
+@keyframes flipHeads {
+  from {
+    -webkit-transform: rotateX(0);
+    -moz-transform: rotateX(0);
+    transform: rotateX(0);
+  }
+  to {
+    -webkit-transform: rotateX(1800deg);
+    -moz-transform: rotateX(1800deg);
+    transform: rotateX(1800deg);
+  }
+}
+
 @-webkit-keyframes flipTails {
+  from {
+    -webkit-transform: rotateX(0);
+    -moz-transform: rotateX(0);
+    transform: rotateX(0);
+  }
+  to {
+    -webkit-transform: rotateX(1980deg);
+    -moz-transform: rotateX(1980deg);
+    transform: rotateX(1980deg);
+  }
+}
+
+@-moz-keyframes flipTails {
+  from {
+    -webkit-transform: rotateX(0);
+    -moz-transform: rotateX(0);
+    transform: rotateX(0);
+  }
+  to {
+    -webkit-transform: rotateX(1980deg);
+    -moz-transform: rotateX(1980deg);
+    transform: rotateX(1980deg);
+  }
+}
+
+@-o-keyframes flipTails {
+  from {
+    -webkit-transform: rotateX(0);
+    -moz-transform: rotateX(0);
+    transform: rotateX(0);
+  }
+  to {
+    -webkit-transform: rotateX(1980deg);
+    -moz-transform: rotateX(1980deg);
+    transform: rotateX(1980deg);
+  }
+}
+
+@keyframes flipTails {
   from {
     -webkit-transform: rotateX(0);
     -moz-transform: rotateX(0);
