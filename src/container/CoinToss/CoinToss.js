@@ -21,36 +21,22 @@ const style = {
 
 class CoinToss extends Component {
   state = {
-    coinClasses: "coin",
-    sideAClasses: "side-a",
-    sideBClasses: "side-b",
     tossing: false
   };
 
   coinFlip = () => {
     var flipResult = Math.random();
-    this.setState(prevState => ({
-      ...prevState,
-      tossing: true,
-      coinClasses: ""
-    }));
-    if (flipResult <= 0.5) {
-      this.setState(prevState => ({
-        ...prevState,
-        coinClasses: "coin heads"
-      }));
-    } else {
-      this.setState(prevState => ({
-        ...prevState,
-        coinClasses: "coin tails"
-      }));
-    }
+    this.setState({ tossing: true });
+    document.getElementById("coin").className = "";
     setTimeout(() => {
-      this.setState(prevState => ({
-        ...prevState,
-        coinClasses: "coin",
-        tossing: false
-      }));
+      if (flipResult <= 0.25 || flipResult >= 0.75) {
+        document.getElementById("coin").className += "heads";
+      } else {
+        document.getElementById("coin").className += "tails";
+      }
+    }, 100);
+    setTimeout(() => {
+      this.setState({ tossing: false });
     }, 3000);
   };
 
@@ -58,9 +44,9 @@ class CoinToss extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.coinTossDiv}>
-        <div className={this.state.coinClasses}>
-          <div className={this.state.sideAClasses} />
-          <div className={this.state.sideBClasses} />
+        <div id="coin">
+          <div className="side-a" />
+          <div className="side-b" />
         </div>
         <Grid container className={classes.fixedContainer} justify="center">
           <Grid item>
