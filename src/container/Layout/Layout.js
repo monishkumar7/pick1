@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -10,32 +10,32 @@ import {
   ListItemText,
   Drawer,
   Grid
-} from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
-import MenuIcon from "@material-ui/icons/Menu";
-import { Link } from "react-router-dom";
+} from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import MenuIcon from '@material-ui/icons/Menu';
+import { Link } from 'react-router-dom';
 
 const style = theme => ({
   drawerPaper: {
     width: 240,
-    padding: "1rem 0"
+    padding: '1rem 0'
   },
   toolbar: {
-    display: "flex",
-    justifyContent: "space-between"
+    display: 'flex',
+    justifyContent: 'space-between'
   },
   hiddenIcon: {
-    height: "48px",
-    width: "48px"
+    height: '48px',
+    width: '48px'
   },
   appBar: {
-    boxShadow: "0 1px 5px #ddd"
+    boxShadow: '0 1px 5px #ddd'
   },
   sideDrawerLink: {
-    textDecoration: "none"
+    textDecoration: 'none'
   },
   logo: {
-    fontWeight: "700"
+    fontWeight: '700'
   }
 });
 
@@ -82,11 +82,15 @@ class Layout extends Component {
               <ListItemText primary="Home" />
             </ListItem>
           </Link>
-          {/*<Link to="/couples" onClick={this.closeDrawer} className={classes.sideDrawerLink}>
-           <ListItem button>
-              <ListItemText primary="Couple's Mode" />
-              </ListItem> 
-            </Link>*/}
+          <Link
+            to="/shared"
+            onClick={this.closeDrawer}
+            className={classes.sideDrawerLink}
+          >
+            <ListItem button>
+              <ListItemText primary="Shared" />
+            </ListItem>
+          </Link>
           <Link
             to="/toss"
             onClick={this.closeDrawer}
