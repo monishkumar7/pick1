@@ -12,7 +12,6 @@ class Shared extends Component {
 
   componentDidMount = () => {
     let pathname = window.location.pathname;
-    console.log(this.props.sharedId);
     let shareId = pathname.substring(pathname.lastIndexOf('/') + 1);
     if (!shareId) alert('Invalid URL!');
     else this.props.onShared(shareId);

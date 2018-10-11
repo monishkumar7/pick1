@@ -17,6 +17,7 @@ import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import * as actionCreators from '../../store/actions';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 const style = theme => ({
   drawerPaper: {
@@ -61,7 +62,6 @@ class Layout extends Component {
 
   handleShared = () => {
     this.props.onCreateShared();
-    console.log('SharedId', this.props.sharedId);
     this.closeDrawer();
   };
 
@@ -137,7 +137,9 @@ class Layout extends Component {
       </div>
     );
 
-    return (
+    return this.props.isLoading ? (
+      <Spinner />
+    ) : (
       <div>
         {redirectShared}
         <AppBar className={classes.appBar} color="inherit">
@@ -180,7 +182,8 @@ class Layout extends Component {
 
 const mapStateToProps = state => {
   return {
-    sharedId: state.share.sharedId
+    sharedId: state.share.sharedId,
+    isLoading: state.share.isLoading
   };
 };
 

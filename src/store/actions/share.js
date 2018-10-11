@@ -41,18 +41,32 @@ export const addContent = inputText => {
 
 export const createShared = () => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
+    dispatch(createSharedStart());
     const firestore = getFirestore();
     firestore
       .collection('links')
       .add({ choices: [] })
-      .then(data => dispatch(createSuccess(data.id)))
-      .catch(err => console.log(err));
+      .then(data => dispatch(createSharedSuccess(data.id)))
+      .catch(err => dispatch(createSharedFail(err)));
   };
 };
 
-export const createSuccess = sharedId => {
+export const createSharedStart = () => {
   return {
-    type: actionTypes.CREATE_SHARED,
+    type: actionTypes.CREATE_SHARED_START
+  };
+};
+
+export const createSharedSuccess = sharedId => {
+  return {
+    type: actionTypes.CREATE_SHARED_SUCCESS,
     sharedId: sharedId
+  };
+};
+
+export const createSharedFail = errMessage => {
+  return {
+    type: actionTypes.CREATE_SHARED_FAIL,
+    error: errMessage
   };
 };
