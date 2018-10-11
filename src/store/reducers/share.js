@@ -1,6 +1,7 @@
 const initialState = {
   shared: false,
-  content: ''
+  sharedId: '',
+  content: []
 };
 
 const shareReducer = (state = initialState, action) => {
@@ -9,6 +10,14 @@ const shareReducer = (state = initialState, action) => {
       return {
         shared: true,
         content: action.content
+      };
+    case 'ADDED':
+      return state;
+
+    case 'CREATE_SHARED':
+      return {
+        ...state,
+        sharedId: action.sharedId
       };
     default:
       return state;

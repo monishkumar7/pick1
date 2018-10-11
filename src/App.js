@@ -18,7 +18,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/help" component={Help} />
           <Route exact path="/about" component={About} />
-          <Route exact path="/shared" component={Shared} />
+          <Route path="/shared" component={Shared} />
           <Route exact path="/toss" component={CoinToss} />
           <Route path="/" component={Picker} />
         </Switch>

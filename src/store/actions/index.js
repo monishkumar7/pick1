@@ -1,1 +1,1 @@
-export { shared } from './share';
+export { shared, addContent, createShared } from './share';

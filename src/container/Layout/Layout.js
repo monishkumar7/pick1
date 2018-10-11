@@ -13,7 +13,10 @@ import {
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
-import { Link } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import * as actionCreators from '../../store/actions';
 
 const style = theme => ({
   drawerPaper: {
@@ -56,8 +59,17 @@ class Layout extends Component {
     }));
   };
 
+  handleShared = () => {
+    this.props.onCreateShared();
+    console.log('SharedId', this.props.sharedId);
+    this.closeDrawer();
+  };
+
   render() {
     const { classes } = this.props;
+    let redirectShared = null;
+    if (this.props.sharedId)
+      redirectShared = <Redirect to={'/shared/' + this.props.sharedId} />;
 
     const drawer = (
       <div>
@@ -83,8 +95,8 @@ class Layout extends Component {
             </ListItem>
           </Link>
           <Link
-            to="/shared"
-            onClick={this.closeDrawer}
+            to="/"
+            onClick={this.handleShared}
             className={classes.sideDrawerLink}
           >
             <ListItem button>
@@ -127,6 +139,7 @@ class Layout extends Component {
 
     return (
       <div>
+        {redirectShared}
         <AppBar className={classes.appBar} color="inherit">
           <Toolbar className={classes.toolbar} position="static">
             <IconButton
@@ -165,4 +178,19 @@ class Layout extends Component {
   }
 }
 
-export default withStyles(style)(Layout);
+const mapStateToProps = state => {
+  return {
+    sharedId: state.share.sharedId
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onCreateShared: () => dispatch(actionCreators.createShared())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(style)(Layout));
