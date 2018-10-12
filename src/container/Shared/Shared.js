@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 
 import * as actionCreators from '../../store/actions';
 
 class Shared extends Component {
   state = {
     inputText: '',
-    shareId: ''
+    sharedId: ''
   };
 
   componentDidMount = () => {
     let pathname = window.location.pathname;
-    let shareId = pathname.substring(pathname.lastIndexOf('/') + 1);
-    if (!shareId) alert('Invalid URL!');
-    else this.props.onShared(shareId);
+    let sharedId = pathname.substring(pathname.lastIndexOf('/') + 1);
+    if (!sharedId) alert('Invalid URL!');
+    else {
+      this.setState({ sharedId: sharedId });
+      this.props.onFetchShared(sharedId);
+    }
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.onAdd(this.state.inputText);
+    this.props.onAddChoice(this.state.sharedId, this.state.inputText);
   };
 
   handleChange = event => {
@@ -28,14 +30,11 @@ class Shared extends Component {
 
   render() {
     let content = '';
-    content = this.props.content
-      ? this.props.content.map(item => <h2 key={item}>{item}</h2>)
+    content = this.props.choices
+      ? this.props.choices.map(item => <h2 key={item}>{item}</h2>)
       : null;
     return (
       <div style={{ marginTop: '10rem' }}>
-        {this.state.sharedId ? (
-          <Redirect to={'/shared/' + this.props.shareId} />
-        ) : null}
         Shared <br />
         {content}
         <form onSubmit={this.handleSubmit}>
@@ -49,15 +48,16 @@ class Shared extends Component {
 
 const mapStateToProps = state => {
   return {
-    content: state.share.content,
-    shareId: state.share.sharedId
+    choices: state.share.choices,
+    sharedId: state.share.sharedId
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onShared: shareId => dispatch(actionCreators.shared(shareId)),
-    onAdd: inputText => dispatch(actionCreators.addContent(inputText))
+    onFetchShared: sharedId => dispatch(actionCreators.fetchShared(sharedId)),
+    onAddChoice: (sharedId, inputText) =>
+      dispatch(actionCreators.addChoice(sharedId, inputText))
   };
 };
 

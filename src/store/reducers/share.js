@@ -1,19 +1,33 @@
 const initialState = {
   shared: false,
   sharedId: '',
-  content: [],
-  isLoading: false
+  choices: [],
+  isLoading: false,
+  error: null
 };
 
 const shareReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'SHARED':
+    case 'FETCH_SHARED_START':
       return {
-        shared: true,
-        content: action.content
+        ...state,
+        isLoading: true
       };
-    case 'ADDED':
-      return state;
+
+    case 'FETCH_SHARED_SUCCESS':
+      return {
+        ...state,
+        choices: action.choices,
+        shared: true,
+        isLoading: false
+      };
+
+    case 'FETCH_SHARED_FAIL':
+      return {
+        ...state,
+        error: action.error,
+        isLoading: false
+      };
 
     case 'CREATE_SHARED_START':
       return {
@@ -31,8 +45,10 @@ const shareReducer = (state = initialState, action) => {
     case 'CREATE_SHARED_FAIL':
       return {
         ...state,
+        error: action.error,
         isLoading: false
       };
+
     default:
       return state;
   }

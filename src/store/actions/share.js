@@ -1,44 +1,5 @@
 import * as actionTypes from './actionTypes';
 
-export const sharedAPI = content => {
-  return {
-    type: actionTypes.SHARED,
-    content: content
-  };
-};
-
-export const shared = shareId => {
-  return (dispatch, getState, { getFirebase, getFirestore }) => {
-    const firestore = getFirestore();
-    firestore
-      .collection('links')
-      .doc(shareId)
-      .onSnapshot(docRef => {
-        console.log(docRef.id, ' => ', docRef.data().choices);
-        dispatch(sharedAPI(docRef.data().choices));
-      });
-  };
-};
-
-export const addAPI = () => {
-  return {
-    type: actionTypes.ADDED
-  };
-};
-
-export const addContent = inputText => {
-  return (dispatch, getState, { getFirebase, getFirestore }) => {
-    const firebase = getFirebase();
-    const firestore = getFirestore();
-    firestore
-      .collection('links')
-      .doc('S8sqsx3CcC0WVfw69TGq')
-      .update({ choices: firebase.firestore.FieldValue.arrayUnion(inputText) })
-      .then(data => dispatch(addAPI()))
-      .catch(err => console.log(err));
-  };
-};
-
 export const createShared = () => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     dispatch(createSharedStart());
@@ -64,9 +25,76 @@ export const createSharedSuccess = sharedId => {
   };
 };
 
-export const createSharedFail = errMessage => {
+export const createSharedFail = error => {
   return {
     type: actionTypes.CREATE_SHARED_FAIL,
-    error: errMessage
+    error: error
+  };
+};
+
+export const fetchShared = sharedId => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    dispatch(fetchSharedStart());
+    const firestore = getFirestore();
+    firestore
+      .collection('links')
+      .doc(sharedId)
+      .onSnapshot(docRef => {
+        console.log(docRef.id, ' => ', docRef.data().choices);
+        dispatch(fetchSharedSuccess(docRef.data().choices));
+      });
+  };
+};
+
+export const fetchSharedStart = () => {
+  return {
+    type: actionTypes.FETCH_SHARED_START
+  };
+};
+
+export const fetchSharedSuccess = choices => {
+  return {
+    type: actionTypes.FETCH_SHARED_SUCCESS,
+    choices: choices
+  };
+};
+
+export const fetchSharedFail = error => {
+  return {
+    type: actionTypes.FETCH_SHARED_START,
+    error: error
+  };
+};
+
+export const addChoice = (sharedId, choiceText) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firebase = getFirebase();
+    const firestore = getFirestore();
+    firestore
+      .collection('links')
+      .doc(sharedId)
+      .update({ choices: firebase.firestore.FieldValue.arrayUnion(choiceText) })
+      .then(data => dispatch(addChoiceSuccess(data)))
+      .catch(err => console.log(err));
+  };
+};
+
+export const addChoiceStart = () => {
+  return {
+    type: actionTypes.ADD_CHOICE_START
+  };
+};
+
+export const addChoiceSuccess = data => {
+  return {
+    type: actionTypes.ADD_CHOICE_SUCCESS,
+    data: data
+  };
+};
+
+export const addChoiceFail = error => {
+  return {
+    type: actionTypes.ADD_CHOICE_FAIL,
+    error: error
   };
 };
