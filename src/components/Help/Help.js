@@ -1,15 +1,15 @@
-import React from "react";
-import { Grid, Typography } from "@material-ui/core/";
-import { withStyles } from "@material-ui/core/styles";
+import React from 'react';
+import { Grid, Typography } from '@material-ui/core/';
+import { withStyles } from '@material-ui/core/styles';
 
 const style = {
   title: {
-    margin: "6rem 0 2rem",
-    padding: "0 2rem"
+    margin: '6rem 0 2rem',
+    padding: '0 2rem'
   },
   textContent: {
-    padding: "1rem 2rem",
-    margin: "1rem 0"
+    padding: '1rem 2rem',
+    margin: '1rem 0'
   }
 };
 
@@ -34,10 +34,7 @@ const help = props => {
               button to pick one. <br />
               <br />
               Pro Tip - Keep hitting the "Pick1 Again" button until your
-              preferred choice from the list shows up{" "}
-              <span role="img" aria-label="wink">
-                😉
-              </span>
+              preferred choice from the list shows up.
             </Typography>
           </Grid>
           <Grid item xs={12} className={classes.textContent}>
