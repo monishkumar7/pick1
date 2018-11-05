@@ -36,7 +36,7 @@ const styles = theme => ({
     left: '0'
   },
   textField: {
-    width: '70%'
+    width: '100%'
   },
   button: {
     width: '160px'
@@ -74,6 +74,9 @@ const styles = theme => ({
     fontSize: '12px',
     minHeight: '20px',
     borderRadius: '20px'
+  },
+  inputForm: {
+    margin: '1rem 2rem'
   }
 });
 
@@ -180,7 +183,10 @@ class Picker extends Component {
               </Grid>
             )}
             <Grid item xs={12} className={classes.newItemCard}>
-              <form onSubmit={event => this.handleFormSubmit(event)}>
+              <form
+                className={classes.inputForm}
+                onSubmit={event => this.handleFormSubmit(event)}
+              >
                 <TextField
                   label="Add New Choice"
                   placeholder="Enter New Choice"
