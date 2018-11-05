@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { withStyles } from "@material-ui/core/styles";
+import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import {
   Typography,
   Grid,
@@ -10,62 +10,70 @@ import {
   DialogTitle,
   DialogContent,
   DialogContentText,
-  DialogActions
-} from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close";
-import uniqid from "uniqid";
+  DialogActions,
+  InputAdornment
+} from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
+import uniqid from 'uniqid';
 
-import Spinner from "../../components/UI/Spinner/Spinner";
-import ListItem from "../../components/ListItem/ListItem";
+import Spinner from '../../components/UI/Spinner/Spinner';
+import ListItem from '../../components/ListItem/ListItem';
 
 const styles = theme => ({
   container: {
-    marginTop: "5rem",
-    marginBottom: "16rem"
+    marginTop: '5rem',
+    marginBottom: '16rem'
   },
   content: {
-    textAlign: "center"
+    textAlign: 'center'
   },
   newItemCard: {
-    margin: "1rem 0"
+    margin: '1rem 0'
   },
   fixedContainer: {
-    position: "fixed",
-    bottom: "0",
-    left: "0"
+    position: 'fixed',
+    bottom: '0',
+    left: '0'
   },
   textField: {
-    width: "70%"
+    width: '70%'
   },
   button: {
-    width: "160px"
+    width: '160px'
   },
   pickerButton: {
-    margin: "1rem 0 2rem"
+    margin: '1rem 0 2rem'
   },
   pickedItemText: {
-    padding: "1rem"
+    padding: '1rem'
   },
   pickedItem: {
-    padding: "1rem 0 0.5rem"
+    padding: '1rem 0 0.5rem'
   },
   pickedContainer: {
-    padding: "1rem 2rem"
+    padding: '1rem 2rem'
   },
   hiddenIcon: {
-    height: "24px",
-    width: "24px"
+    height: '24px',
+    width: '24px'
   },
   pickedHeader: {
-    padding: "0 1rem",
-    alignItems: "center"
+    padding: '0 1rem',
+    alignItems: 'center'
   },
   emptyContent: {
-    padding: "0 3rem",
-    margin: "2rem 0"
+    padding: '0 3rem',
+    margin: '2rem 0'
   },
   disabledButtonText: {
-    margin: "10px 0 0"
+    margin: '10px 0 0'
+  },
+  addButton: {
+    bottom: '5px',
+    position: 'relative',
+    fontSize: '12px',
+    minHeight: '20px',
+    borderRadius: '20px'
   }
 });
 
@@ -73,8 +81,8 @@ class Picker extends Component {
   state = {
     items: [],
     picked: false,
-    newItemValue: "",
-    pickedItem: "",
+    newItemValue: '',
+    pickedItem: '',
     picking: false,
     dialogOpen: false
   };
@@ -87,7 +95,7 @@ class Picker extends Component {
         id: uniqid(),
         text: prevState.newItemValue
       }),
-      newItemValue: ""
+      newItemValue: ''
     }));
   };
 
@@ -154,7 +162,7 @@ class Picker extends Component {
     this.setState(prevState => ({
       ...prevState,
       picked: false,
-      pickedItem: ""
+      pickedItem: ''
     }));
   };
 
@@ -180,6 +188,24 @@ class Picker extends Component {
                   value={this.state.newItemValue}
                   margin="normal"
                   onChange={event => this.inputChangeHandler(event)}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        {this.state.newItemValue && (
+                          <Button
+                            className={classes.addButton}
+                            onClick={this.handleFormSubmit}
+                            color="primary"
+                            variant="contained"
+                          >
+                            <Typography variant="button" color="inherit">
+                              Add
+                            </Typography>
+                          </Button>
+                        )}
+                      </InputAdornment>
+                    )
+                  }}
                 />
               </form>
             </Grid>
@@ -222,7 +248,7 @@ class Picker extends Component {
             aria-describedby="alert-dialog-description"
           >
             <DialogTitle id="alert-dialog-title">
-              {"Confirm Clear All"}
+              {'Confirm Clear All'}
             </DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
@@ -239,7 +265,7 @@ class Picker extends Component {
             </DialogActions>
           </Dialog>
           <Grid container className={classes.fixedContainer} justify="center">
-            {this.state.pickedItem !== "" && (
+            {this.state.pickedItem !== '' && (
               <Grid item xs={12} sm={8} className={classes.pickedContainer}>
                 <Card className={classes.pickedItem}>
                   <Grid
